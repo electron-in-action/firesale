@@ -1,3 +1,6 @@
 # Fire Sale
 
-Stay tuned. We'll be posting the WIP code shortly followed by chapter-by-chapter tagged commits and branches once Chapter 8 is complete.
+Completed code from [Electron in Action](http://bit.ly/electronjs).
+
+- [Code from the end of Chapter 3](https://github.com/electron-in-action/firesale/tree/chapter-3)
+- [Code from the end of Chapter 4](https://github.com/electron-in-action/firesale/tree/chapter-4)
