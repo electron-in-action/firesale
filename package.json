@@ -2,10 +2,9 @@
   "name": "firesale",
   "version": "1.0.0",
   "description": "Completed code from [Electron in Action](http://bit.ly/electronjs).",
-  "main": "index.js",
+  "main": "app/main.js",
   "dependencies": {
     "electron": "^1.4.8",
-    "jquery": "^3.1.1",
     "marked": "^0.3.6"
   },
   "devDependencies": {
@@ -16,6 +15,7 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
