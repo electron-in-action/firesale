@@ -1,0 +1,80 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+body, input {
+  font: menu;
+}
+
+textarea, input, div, button {
+  outline: none;
+  margin: 0;
+}
+
+.controls {
+  background-color: rgb(217, 241, 238);
+  padding: 10px 10px 10px 10px;
+}
+
+button {
+  font-size: 14px;
+  background-color: rgb(181, 220, 216);
+  border: none;
+  padding: 0.5em 1em;
+}
+
+button:hover {
+  background-color: rgb(156, 198, 192);
+}
+
+button:active {
+  background-color: rgb(144, 182, 177);
+}
+
+button:disabled {
+  background-color: rgb(196, 204, 202);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+}
+
+.raw-markdown, .rendered-html {
+  min-height: 100%;
+  max-width: 50%;
+  flex-grow: 1;
+  padding: 1em;
+  overflow: scroll;
+  font-size: 16px;
+}
+
+.raw-markdown {
+  border: 5px solid rgb(238, 252, 250);;
+  background-color: rgb(238, 252, 250);
+  font-family: monospace;
+}
