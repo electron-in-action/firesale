@@ -26,11 +26,11 @@ const getFileFromUser  = exports.getFileFromUser   = () => {
     ]
   });
 
-  if (files) { openFile(files[0]) } // A
+  if (files) { openFile(files[0]); }
 };
 
 const openFile = (file) => {
   const content = fs.readFileSync(file).toString();
-  mainWindow.webContents.send('file-opened', file, content); // B
+  mainWindow.webContents.send('file-opened', file, content);
 };
 
