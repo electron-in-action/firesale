@@ -1,21 +1,10 @@
 const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('fs');
 
-let mainWindow = null;
 const windows = new Set();
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({ show: false });
-
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
-
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+  createWindow();
 });
 
 const createWindow = exports.createWindow = () => {
