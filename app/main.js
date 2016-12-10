@@ -2,6 +2,7 @@ const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('fs');
 
 let mainWindow = null;
+const windows = new Set();
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({ show: false });
@@ -17,7 +18,7 @@ app.on('ready', () => {
   });
 });
 
-const getFileFromUser  = exports.getFileFromUser   = () => {
+const getFileFromUser  = exports.getFileFromUser = () => {
   const files = dialog.showOpenDialog(mainWindow, {
     properties: ['openFile'],
     filters: [
