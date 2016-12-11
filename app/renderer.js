@@ -14,6 +14,9 @@ const saveHtmlButton = document.querySelector('#save-html');
 const showFileButton = document.querySelector('#show-file');
 const openInDefaultButton = document.querySelector('#open-in-default');
 
+let filePath = null;
+let originalContent = '';
+
 const renderMarkdownToHtml = (markdown) => {
   htmlView.innerHTML = marked(markdown, { sanitize: true });
 };
@@ -32,6 +35,9 @@ openFileButton.addEventListener('click', () => {
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
+  filePath = file;
+  originalContent = content;
+  
   markdownView.value = content;
   renderMarkdownToHtml(content);
 });
