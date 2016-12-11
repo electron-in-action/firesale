@@ -1,4 +1,5 @@
 const { remote, ipcRenderer } = require('electron');
+const path = require('path');
 const mainProcess = remote.require('./main.js');
 const currentWindow = remote.getCurrentWindow();
 
@@ -21,6 +22,12 @@ const renderMarkdownToHtml = (markdown) => {
   htmlView.innerHTML = marked(markdown, { sanitize: true });
 };
 
+const updateUserInterface = () => {
+  let title = 'Fire Sale';
+  if (filePath) { title = `${path.basename(filePath)} - ${title}`; }
+  currentWindow.setTitle(title);
+};
+
 markdownView.addEventListener('keyup', (event) => {
   const currentContent = event.target.value;
   renderMarkdownToHtml(currentContent);
@@ -40,4 +47,6 @@ ipcRenderer.on('file-opened', (event, file, content) => {
   
   markdownView.value = content;
   renderMarkdownToHtml(content);
+  
+  updateUserInterface();
 });
