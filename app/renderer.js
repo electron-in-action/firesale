@@ -24,13 +24,13 @@ const renderMarkdownToHtml = (markdown) => {
 
 const updateUserInterface = (isEdited) => {
   let title = 'Fire Sale';
-  
+
   if (filePath) { title = `${path.basename(filePath)} - ${title}`; }
   if (isEdited) { title = `${title} (Edited)`; }
-  
+
   currentWindow.setTitle(title);
   currentWindow.setDocumentEdited(isEdited);
-  
+
   saveMarkdownButton.disabled = !isEdited;
   revertButton.disabled = !isEdited;
 };
@@ -65,9 +65,49 @@ saveHtmlButton.addEventListener('click', () => {
 ipcRenderer.on('file-opened', (event, file, content) => {
   filePath = file;
   originalContent = content;
-  
+
   markdownView.value = content;
   renderMarkdownToHtml(content);
-  
+
   updateUserInterface(false);
+});
+
+/* Implement Drag and Drop */
+document.addEventListener('dragstart', event => event.preventDefault());
+document.addEventListener('dragover', event => event.preventDefault());
+document.addEventListener('dragleave', event => event.preventDefault());
+document.addEventListener('drop', event => event.preventDefault());
+
+const getDraggedFile = (event) => event.dataTransfer.files[0];
+
+const fileTypeIsSupported = (file) => {
+  return ['text/plain', 'text/markdown'].includes(file.type);
+};
+
+markdownView.addEventListener('dragover', (event) => {
+  const file = getDraggedFile(event);
+
+  if (fileTypeIsSupported(file)) {
+    markdownView.classList.add('drag-over');
+  } else {
+    markdownView.classList.add('drag-error');
+  }
+});
+
+markdownView.addEventListener('dragleave', () => {
+  markdownView.classList.remove('drag-over');
+  markdownView.classList.remove('drag-error');
+});
+
+markdownView.addEventListener('drop', (event) => {
+  const file = getDraggedFile(event);
+
+  if (fileTypeIsSupported(file)) {
+    mainProcess.openFile(currentWindow, file.path);
+  } else {
+    alert('That file type is not supported');
+  }
+
+  markdownView.classList.remove('drag-over');
+  markdownView.classList.remove('drag-error');
 });

@@ -21,13 +21,13 @@ const createWindow = exports.createWindow = () => {
   let x, y;
 
   const currentWindow = BrowserWindow.getFocusedWindow();
-  
+
   if (currentWindow) {
     const [ currentWindowX, currentWindowY ] = currentWindow.getPosition();
     x = currentWindowX + 10;
     y = currentWindowY + 10;
   }
-  
+
   let newWindow = new BrowserWindow({ x, y, show: false });
 
   newWindow.loadURL(`file://${__dirname}/index.html`);
@@ -56,9 +56,8 @@ const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
   if (files) { openFile(targetWindow, files[0]); }
 };
 
-const openFile = (targetWindow, file) => {
+const openFile = exports.openFile = (targetWindow, file) => {
   const content = fs.readFileSync(file).toString();
-  startWatchingFile(win, file);
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
