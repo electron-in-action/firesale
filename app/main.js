@@ -58,6 +58,39 @@ const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
 
 const openFile = (targetWindow, file) => {
   const content = fs.readFileSync(file).toString();
+  startWatchingFile(win, file);
+  app.addRecentDocument(file);
+  targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
 };
 
+const saveMarkdown = exports.saveMarkdown = (targetWindow, file, content) => {
+  if (!file) {
+    file = dialog.showSaveDialog(targetWindow, {
+      title: 'Save Markdown',
+      defaultPath: app.getPath('documents'),
+      filters: [
+        { name: 'Markdown Files', extensions: ['md', 'markdown'] }
+      ]
+    });
+  }
+
+  if (!file) return;
+
+  fs.writeFileSync(file, content);
+  openFile(targetWindow, file);
+};
+
+const saveHtml = exports.saveHtml = (targetWindow, content) => {
+  const file = dialog.showSaveDialog(targetWindow, {
+    title: 'Save HTML',
+    defaultPath: app.getPath('documents'),
+    filters: [
+      { name: 'HTML Files', extensions: ['html', 'htm'] }
+    ]
+  });
+
+  if (!file) return;
+
+  fs.writeFileSync(file, content);
+};
