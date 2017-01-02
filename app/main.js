@@ -37,6 +37,26 @@ const createWindow = exports.createWindow = () => {
     newWindow.show();
   });
 
+  newWindow.on('close', (event) => {
+    if (newWindow.isDocumentEdited()) {
+      event.preventDefault();
+
+      const result = dialog.showMessageBox(newWindow, {
+        type: 'warning',
+        title: 'Quit with Unsaved Changes?',
+        message: 'Your changes will be lost permanently if you do not save.',
+        buttons: [
+          'Quit Anyway',
+          'Cancel',
+        ],
+        cancelId: 1,
+        defaultId: 0
+      });
+
+      if (result === 0) newWindow.destroy();
+    }
+  });
+
   newWindow.on('closed', () => {
     windows.delete(newWindow);
     newWindow = null;
@@ -100,11 +120,9 @@ const saveHtml = exports.saveHtml = (targetWindow, content) => {
 const startWatchingFile = (targetWindow, file) => {
   stopWatchingFile(targetWindow);
 
-  const watcher = fs.watch(file, (event) => {
-    if (event === 'change') {
-      const content = fs.readFileSync(file);
-      targetWindow.webContents.send('file-opened', file, content);
-    }
+  const watcher = fs.watchFile(file, () => {
+    const content = fs.readFileSync(file);
+    targetWindow.webContents.send('file-changed', file, content);
   });
 
   openFiles.set(targetWindow, watcher);

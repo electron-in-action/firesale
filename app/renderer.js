@@ -22,6 +22,16 @@ const renderMarkdownToHtml = (markdown) => {
   htmlView.innerHTML = marked(markdown, { sanitize: true });
 };
 
+const renderFile = (file, content) => {
+  filePath = file;
+  originalContent = content;
+
+  markdownView.value = content;
+  renderMarkdownToHtml(content);
+
+  updateUserInterface(false);
+};
+
 const updateUserInterface = (isEdited) => {
   let title = 'Fire Sale';
 
@@ -63,13 +73,39 @@ saveHtmlButton.addEventListener('click', () => {
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
-  filePath = file;
-  originalContent = content;
+  if (currentWindow.isDocumentEdited()) {
+    const result = remote.dialog.showMessageBox(currentWindow, {
+      type: 'warning',
+      title: 'Overwrite Current Unsaved Changes?',
+      message: 'Opening a new file in this window will overwrite your unsaved changes. Open this file anyway?',
+      buttons: [
+        'Yes',
+        'Cancel',
+      ],
+      defaultId: 0,
+      cancelId: 1,
+    });
 
-  markdownView.value = content;
-  renderMarkdownToHtml(content);
+    if (result === 1) { return; }
+  }
 
-  updateUserInterface(false);
+  renderFile(file, content);
+});
+
+ipcRenderer.on('file-changed', (event, file, content) => {
+  const result = remote.dialog.showMessageBox(currentWindow, {
+    type: 'warning',
+    title: 'Overwrite Current Unsaved Changes?',
+    message: 'Another application has changed this file. Load changes?',
+    buttons: [
+      'Yes',
+      'Cancel',
+    ],
+    defaultId: 0,
+    cancelId: 1
+  });
+
+  renderFile(file, content);
 });
 
 /* Implement Drag and Drop */
