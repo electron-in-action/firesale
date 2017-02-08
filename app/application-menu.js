@@ -6,6 +6,13 @@ const template = [
     label: 'File',
     submenu: [
       {
+        label: 'New File',
+        accelerator: 'CommandOrControl+N',
+        click() {
+          mainProcess.createWindow();
+        }
+      },
+      {
         label: 'Open File',
         accelerator: 'CommandOrControl+O',
         click(item, focusedWindow) {
