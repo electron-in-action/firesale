@@ -169,6 +169,14 @@ markdownView.addEventListener('drop', (event) => {
 
 const markdownContextMenu = Menu.buildFromTemplate([
   { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
+  {
+    label: 'Show File in Folder',
+    click: showFile
+  },
+  {
+    label: 'Open in Default',
+    click: openInDefaultApplication
+  },
   { type: 'separator' },
   { label: 'Cut', role: 'cut' },
   { label: 'Copy', role: 'copy' },
