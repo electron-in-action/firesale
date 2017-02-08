@@ -90,6 +90,8 @@ const openInDefaultApplication = () => {
 
 showFileButton.addEventListener('click', showFile);
 openInDefaultButton.addEventListener('click', openInDefaultApplication);
+ipcRenderer.on('show-file', showFile);
+ipcRenderer.on('open-in-default', openInDefaultApplication);
 
 ipcRenderer.on('file-opened', (event, file, content) => {
   if (currentWindow.isDocumentEdited() && isDifferentContent(content)) {
