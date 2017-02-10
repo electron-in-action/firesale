@@ -75,12 +75,12 @@ const generateApplicationMenu = () => {
           },
         },
         {
-          label: 'Open in Default Editor',
+          label: 'Open in Default Application',
           enabled: hasFilePath,
           click(item, focusedWindow) {
             if (!focusedWindow) {
               return dialog.showErrorBox(
-                'Cannot Open File in Default Editor',
+                'Cannot Open File in Default Application',
                 'There is currently no active document to open.'
               );
             }
