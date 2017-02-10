@@ -167,15 +167,18 @@ markdownView.addEventListener('drop', (event) => {
   markdownView.classList.remove('drag-error');
 });
 
-const markdownContextMenu = Menu.buildFromTemplate([
+const createContextMenu = () => {
+  return Menu.buildFromTemplate([
   { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
   {
     label: 'Show File in Folder',
-    click: showFile
+    click: showFile,
+    enabled: !!filePath
   },
   {
     label: 'Open in Default',
-    click: openInDefaultApplication
+    click: openInDefaultApplication,
+    enabled: !!filePath
   },
   { type: 'separator' },
   { label: 'Cut', role: 'cut' },
@@ -183,9 +186,9 @@ const markdownContextMenu = Menu.buildFromTemplate([
   { label: 'Paste', role: 'paste' },
   { label: 'Select All', role: 'selectall' },
 ]);
-
+};
 
 markdownView.addEventListener('contextmenu', (event) => {
   event.preventDefault();
-  markdownContextMenu.popup();
+  createContextMenu().popup();
 });
