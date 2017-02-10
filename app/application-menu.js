@@ -2,7 +2,6 @@ const { app, dialog, Menu, shell } = require('electron');
 const mainProcess = require('./main');
 
 const generateApplicationMenu = (windows = new Set()) => {
-  console.log('Generating Application Menu', windows.size);
   const hasOneOrMoreWindows = !!windows.size;
 
   const template = [
