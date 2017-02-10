@@ -6,7 +6,7 @@ const windows = new Set();
 const openFiles = new Map();
 
 app.on('ready', () => {
-  Menu.setApplicationMenu(generateApplicationMenu(windows));
+  Menu.setApplicationMenu(generateApplicationMenu());
   createWindow();
 });
 
@@ -39,6 +39,14 @@ const createWindow = exports.createWindow = () => {
     newWindow.show();
   });
 
+  newWindow.on('focus', () => {
+    Menu.setApplicationMenu(generateApplicationMenu());
+  });
+
+  newWindow.on('blur', () => {
+    Menu.setApplicationMenu(generateApplicationMenu());
+  });
+
   newWindow.on('close', (event) => {
     if (newWindow.isDocumentEdited()) {
       event.preventDefault();
@@ -61,13 +69,16 @@ const createWindow = exports.createWindow = () => {
 
   newWindow.on('closed', () => {
     windows.delete(newWindow);
+<<<<<<< HEAD
     stopWatchingFile(newWindow);
     Menu.setApplicationMenu(generateApplicationMenu(windows));
+=======
+    Menu.setApplicationMenu(generateApplicationMenu());
+>>>>>>> Get shell commands working correctly
     newWindow = null;
   });
 
   windows.add(newWindow);
-  Menu.setApplicationMenu(generateApplicationMenu(windows));
   return newWindow;
 };
 
@@ -88,7 +99,11 @@ const openFile = exports.openFile = (targetWindow, file) => {
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
+<<<<<<< HEAD
   startWatchingFile(targetWindow, file);
+=======
+  Menu.setApplicationMenu(generateApplicationMenu());
+>>>>>>> Get shell commands working correctly
 };
 
 

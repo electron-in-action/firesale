@@ -1,8 +1,10 @@
-const { app, dialog, Menu, shell } = require('electron');
+const { app, BrowserWindow, dialog, Menu, shell } = require('electron');
 const mainProcess = require('./main');
 
-const generateApplicationMenu = (windows = new Set()) => {
-  const hasOneOrMoreWindows = !!windows.size;
+const generateApplicationMenu = () => {
+  const hasOneOrMoreWindows = !!BrowserWindow.getAllWindows().length;
+  const focusedWindow = BrowserWindow.getFocusedWindow();
+  const hasFilePath = !!(focusedWindow && focusedWindow.getRepresentedFilename());
 
   const template = [
     {
@@ -61,7 +63,7 @@ const generateApplicationMenu = (windows = new Set()) => {
         { type: 'separator' },
         {
           label: 'Show File',
-          enabled: hasOneOrMoreWindows,
+          enabled: hasFilePath,
           click(item, focusedWindow) {
             if (!focusedWindow) {
               return dialog.showErrorBox(
@@ -74,7 +76,7 @@ const generateApplicationMenu = (windows = new Set()) => {
         },
         {
           label: 'Open in Default Editor',
-          enabled: hasOneOrMoreWindows,
+          enabled: hasFilePath,
           click(item, focusedWindow) {
             if (!focusedWindow) {
               return dialog.showErrorBox(
