@@ -169,23 +169,23 @@ markdownView.addEventListener('drop', (event) => {
 
 const createContextMenu = () => {
   return Menu.buildFromTemplate([
-  { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
-  {
-    label: 'Show File in Folder',
-    click: showFile,
-    enabled: !!filePath
-  },
-  {
-    label: 'Open in Default',
-    click: openInDefaultApplication,
-    enabled: !!filePath
-  },
-  { type: 'separator' },
-  { label: 'Cut', role: 'cut' },
-  { label: 'Copy', role: 'copy' },
-  { label: 'Paste', role: 'paste' },
-  { label: 'Select All', role: 'selectall' },
-]);
+    { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
+    {
+      label: 'Show File in Folder',
+      click: showFile,
+      enabled: !!filePath
+    },
+    {
+      label: 'Open in Default',
+      click: openInDefaultApplication,
+      enabled: !!filePath
+    },
+    { type: 'separator' },
+    { label: 'Cut', role: 'cut' },
+    { label: 'Copy', role: 'copy' },
+    { label: 'Paste', role: 'paste' },
+    { label: 'Select All', role: 'selectall' },
+  ]);
 };
 
 markdownView.addEventListener('contextmenu', (event) => {
