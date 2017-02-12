@@ -21,13 +21,13 @@ const createWindow = exports.createWindow = () => {
   let x, y;
 
   const currentWindow = BrowserWindow.getFocusedWindow();
-  
+
   if (currentWindow) {
     const [ currentWindowX, currentWindowY ] = currentWindow.getPosition();
     x = currentWindowX + 10;
     y = currentWindowY + 10;
   }
-  
+
   let newWindow = new BrowserWindow({ x, y, show: false });
 
   newWindow.loadURL(`file://${__dirname}/index.html`);
@@ -41,6 +41,7 @@ const createWindow = exports.createWindow = () => {
     newWindow = null;
   });
 
+  windows.add(newWindow);
   return newWindow;
 };
 
