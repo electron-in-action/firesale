@@ -1,7 +1,7 @@
 const { app, BrowserWindow, dialog, Menu, shell } = require('electron');
 const mainProcess = require('./main');
 
-const generateApplicationMenu = () => {
+const createApplicationMenu = () => {
   const hasOneOrMoreWindows = !!BrowserWindow.getAllWindows().length;
   const focusedWindow = BrowserWindow.getFocusedWindow();
   const hasFilePath = !!(focusedWindow && focusedWindow.getRepresentedFilename());
@@ -207,7 +207,7 @@ const generateApplicationMenu = () => {
     );
   }
 
-  return Menu.buildFromTemplate(template);
+  return Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 };
 
-module.exports = generateApplicationMenu;
+module.exports = createApplicationMenu;

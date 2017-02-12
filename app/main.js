@@ -1,12 +1,12 @@
 const { app, BrowserWindow, dialog, Menu } = require('electron');
-const generateApplicationMenu = require('./application-menu');
+const createApplicationMenu = require('./application-menu');
 const fs = require('fs');
 
 const windows = new Set();
 const openFiles = new Map();
 
 app.on('ready', () => {
-  Menu.setApplicationMenu(generateApplicationMenu());
+  createApplicationMenu();
   createWindow();
 });
 
@@ -39,13 +39,7 @@ const createWindow = exports.createWindow = () => {
     newWindow.show();
   });
 
-  newWindow.on('focus', () => {
-    Menu.setApplicationMenu(generateApplicationMenu());
-  });
-
-  newWindow.on('blur', () => {
-    Menu.setApplicationMenu(generateApplicationMenu());
-  });
+  newWindow.on('focus', createApplicationMenu);
 
   newWindow.on('close', (event) => {
     if (newWindow.isDocumentEdited()) {
@@ -70,11 +64,15 @@ const createWindow = exports.createWindow = () => {
   newWindow.on('closed', () => {
     windows.delete(newWindow);
 <<<<<<< HEAD
+<<<<<<< HEAD
     stopWatchingFile(newWindow);
     Menu.setApplicationMenu(generateApplicationMenu(windows));
 =======
     Menu.setApplicationMenu(generateApplicationMenu());
 >>>>>>> Get shell commands working correctly
+=======
+    createApplicationMenu();
+>>>>>>> Refactor code
     newWindow = null;
   });
 
@@ -100,10 +98,14 @@ const openFile = exports.openFile = (targetWindow, file) => {
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
 <<<<<<< HEAD
+<<<<<<< HEAD
   startWatchingFile(targetWindow, file);
 =======
   Menu.setApplicationMenu(generateApplicationMenu());
 >>>>>>> Get shell commands working correctly
+=======
+  createApplicationMenu();
+>>>>>>> Refactor code
 };
 
 
