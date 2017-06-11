@@ -1,5 +1,6 @@
 {
   "name": "firesale",
+  "productName": "Fire Sale",
   "version": "1.0.0",
   "description": "Completed code from [Electron in Action](http://bit.ly/electronjs).",
   "main": "app/main.js",
@@ -16,6 +17,10 @@
   },
   "scripts": {
     "start": "electron .",
+    "build": "npm run build-mac && npm run build-win && npm run build-linux",
+    "build-mac": "electron-packager . --platform=darwin --out=build --icons=icons/Icons.icns --asar --overwrite",
+    "build-win": "electron-packager . --platform=win32 --out=build --icons=icons/Icons.ico --asar --overwrite",
+    "build-linux": "electron-packager . --platform=linux --out=build --icons=icons/Icons.png --asar --overwrite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
