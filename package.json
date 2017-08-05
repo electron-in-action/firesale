@@ -21,6 +21,7 @@
     "build-mac": "electron-packager . --platform=darwin --out=build --icon=./icons/Icon.icns --asar --overwrite",
     "build-win": "electron-packager . --platform=win32 --out=build --icon=./icons/Icons.ico --asar --overwrite",
     "build-linux": "electron-packager . --platform=linux --out=build --icon=./icons/Icons.png --asar --overwrite",
+    "build-mas": "./scripts/mas/build.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
