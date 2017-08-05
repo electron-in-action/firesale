@@ -13,7 +13,7 @@ electron-packager . \
   --app-version="$npm_package_version" \
   --build-version="1.0.0" \
   --arch=x64 \
-  --icon=icons/Icons.icns \
+  --icon=./icons/Icon.icns \
   --out=build \
   --extend-info=scripts/mas/info.plist
 
