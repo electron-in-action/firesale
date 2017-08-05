@@ -18,6 +18,8 @@ const openInDefaultButton = document.querySelector('#open-in-default');
 let filePath = null;
 let originalContent = '';
 
+const isDifferentContent = (content) => content !== markdownView.value;
+
 const renderMarkdownToHtml = (markdown) => {
   htmlView.innerHTML = marked(markdown, { sanitize: true });
 };
@@ -48,7 +50,7 @@ const updateUserInterface = (isEdited) => {
 markdownView.addEventListener('keyup', (event) => {
   const currentContent = event.target.value;
   renderMarkdownToHtml(currentContent);
-  updateUserInterface(currentContent !== originalContent)
+  updateUserInterface(currentContent !== originalContent);
 });
 
 newFileButton.addEventListener('click', () => {
@@ -73,7 +75,7 @@ saveHtmlButton.addEventListener('click', () => {
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
-  if (currentWindow.isDocumentEdited()) {
+  if (currentWindow.isDocumentEdited() && isDifferentContent(content)) {
     const result = remote.dialog.showMessageBox(currentWindow, {
       type: 'warning',
       title: 'Overwrite Current Unsaved Changes?',
@@ -93,6 +95,7 @@ ipcRenderer.on('file-opened', (event, file, content) => {
 });
 
 ipcRenderer.on('file-changed', (event, file, content) => {
+  if (isDifferentContent(content)) return;
   const result = remote.dialog.showMessageBox(currentWindow, {
     type: 'warning',
     title: 'Overwrite Current Unsaved Changes?',

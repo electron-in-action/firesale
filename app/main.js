@@ -59,6 +59,7 @@ const createWindow = exports.createWindow = () => {
 
   newWindow.on('closed', () => {
     windows.delete(newWindow);
+    stopWatchingFile(newWindow);
     newWindow = null;
   });
 
@@ -80,10 +81,10 @@ const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
 
 const openFile = exports.openFile = (targetWindow, file) => {
   const content = fs.readFileSync(file).toString();
-  startWatchingFile(targetWindow, file);
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
+  startWatchingFile(targetWindow, file);
 };
 
 
