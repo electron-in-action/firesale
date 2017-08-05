@@ -63,16 +63,8 @@ const createWindow = exports.createWindow = () => {
 
   newWindow.on('closed', () => {
     windows.delete(newWindow);
-<<<<<<< HEAD
-<<<<<<< HEAD
     stopWatchingFile(newWindow);
-    Menu.setApplicationMenu(generateApplicationMenu(windows));
-=======
-    Menu.setApplicationMenu(generateApplicationMenu());
->>>>>>> Get shell commands working correctly
-=======
     createApplicationMenu();
->>>>>>> Refactor code
     newWindow = null;
   });
 
@@ -97,15 +89,8 @@ const openFile = exports.openFile = (targetWindow, file) => {
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
-<<<<<<< HEAD
-<<<<<<< HEAD
   startWatchingFile(targetWindow, file);
-=======
-  Menu.setApplicationMenu(generateApplicationMenu());
->>>>>>> Get shell commands working correctly
-=======
   createApplicationMenu();
->>>>>>> Refactor code
 };
 
 
