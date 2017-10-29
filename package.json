@@ -24,9 +24,9 @@
     "build-mac":
       "electron-packager . --platform=darwin --out=build --icon=./icons/Icon.icns --asar --overwrite --app-bundle-id=\"net.stevekinney.firesale\" --app-version=\"1.0.0\" --build-version=\"1.0.100\" --osx-sign",
     "build-win":
-      "electron-packager . --platform=win32 --out=build --icon=./icons/Icons.ico --asar --overwrite --version-string.ProductName=\"Fire Sale\" && node ./scripts/windows.js",
+      "electron-packager . --platform=win32 --out=build --icon=./icons/Icon.ico --asar --overwrite --version-string.ProductName=\"Fire Sale\" && node ./scripts/windows.js",
     "build-linux":
-      "electron-packager . --platform=linux --out=build --icon=./icons/Icons.png --asar --overwrite",
+      "electron-packager . --platform=linux --out=build --icon=./icons/Icon.png --asar --overwrite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
