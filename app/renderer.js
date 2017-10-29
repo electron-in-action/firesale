@@ -4,6 +4,8 @@ const path = require('path');
 const mainProcess = remote.require('./main.js');
 const currentWindow = remote.getCurrentWindow();
 
+require('./crash-reporter');
+
 const marked = require('marked');
 
 const markdownView = document.querySelector('#markdown');

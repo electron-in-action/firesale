@@ -2,6 +2,8 @@ const { app, BrowserWindow, dialog, Menu } = require('electron');
 const createApplicationMenu = require('./application-menu');
 const fs = require('fs');
 
+require('./crash-reporter');
+
 const windows = new Set();
 const openFiles = new Map();
 
@@ -41,7 +43,7 @@ const createWindow = exports.createWindow = () => {
 
   newWindow.on('focus', createApplicationMenu);
 
-  newWindow.on('close', (event) => {
+  newWindow.on('close', event => {
     if (newWindow.isDocumentEdited()) {
       event.preventDefault();
 
