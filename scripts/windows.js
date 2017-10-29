@@ -8,10 +8,10 @@ const result = electronInstaller.createWindowsInstaller({
   authors: 'Steve Kinney',
   exe: 'Fire Sale.exe',
   icon: iconPath,
-  name: 'Fire Sale',
+  name: 'FireSale',
   outputDirectory: path.resolve(
     __dirname,
-    '../build/Fire Sale-win32-x64-installer',
+    '../build/Fire Sale-win32-x64-installer'
   ),
   setupExe: 'FireSaleSetup.exe',
   setupIcon: iconPath,
