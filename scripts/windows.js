@@ -1,13 +1,24 @@
 const electronInstaller = require('electron-winstaller');
 const path = require('path');
 
+const iconPath = path.resolve(__dirname, '../icons/Icon.ico');
+
 const result = electronInstaller.createWindowsInstaller({
   appDirectory: path.resolve(__dirname, '../build/Fire Sale-win32-x64'),
-  outputDirectory: path.resolve(__dirname, '../build/Fire Sale-win32-x64-installer'),
   authors: 'Steve Kinney',
   exe: 'Fire Sale.exe',
-  icon: path.resolve(__dirname, '../icons/Icons.ico')
+  icon: iconPath,
+  name: 'Fire Sale',
+  outputDirectory: path.resolve(
+    __dirname,
+    '../build/Fire Sale-win32-x64-installer',
+  ),
+  setupExe: 'FireSaleSetup.exe',
+  setupIcon: iconPath,
+  setupMsi: 'FireSaleSetup.msi',
+  title: 'Fire Sale',
 });
 
-result.then(() => console.log('Success'))
-      .catch((error) => console.error('Failed', error));
+result
+  .then(() => console.log('Success'))
+  .catch(error => console.error('Failed', error));
