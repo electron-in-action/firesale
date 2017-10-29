@@ -13,6 +13,7 @@
     "babel-eslint": "^7.2.3",
     "devtron": "^1.4.0",
     "electron-packager": "^8.7.1",
+    "electron-winstaller": "^2.6.3",
     "eslint": "^3.19.0",
     "eslint-plugin-import": "^2.3.0"
   },
@@ -20,7 +21,7 @@
     "start": "electron .",
     "build": "npm run build-mac && npm run build-win && npm run build-linux",
     "build-mac": "electron-packager . --platform=darwin --out=build --icon=./icons/Icon.icns --asar --overwrite --app-bundle-id=\"net.stevekinney.firesale\" --app-version=\"1.0.0\" --build-version=\"1.0.100\" --osx-sign",
-    "build-win": "electron-packager . --platform=win32 --out=build --icon=./icons/Icons.ico --asar --overwrite",
+    "build-win": "electron-packager . --platform=win32 --out=build --icon=./icons/Icons.ico --asar --overwrite && node ./scripts/windows.js",
     "build-linux": "electron-packager . --platform=linux --out=build --icon=./icons/Icons.png --asar --overwrite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
