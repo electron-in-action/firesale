@@ -4,6 +4,8 @@ const fs = require('fs');
 
 require('./crash-reporter');
 
+if(require('electron-squirrel-startup')) return;
+
 const windows = new Set();
 const openFiles = new Map();
 
