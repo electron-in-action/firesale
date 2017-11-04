@@ -1,5 +1,5 @@
 const { remote, ipcRenderer, shell } = require('electron');
-const { Menu } = remote; // A
+const { app, Menu, autoUpdater } = remote; // A
 const path = require('path');
 const mainProcess = remote.require('./main.js');
 const currentWindow = remote.getCurrentWindow();

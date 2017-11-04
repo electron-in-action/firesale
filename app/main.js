@@ -2,6 +2,8 @@ const { app, BrowserWindow, dialog, Menu } = require('electron');
 const createApplicationMenu = require('./application-menu');
 const fs = require('fs');
 
+const autoUpdater = require('./auto-updater');
+
 require('./crash-reporter');
 
 if(require('electron-squirrel-startup')) return;
@@ -12,6 +14,7 @@ const openFiles = new Map();
 app.on('ready', () => {
   createApplicationMenu();
   createWindow();
+  autoUpdater.checkForUpdates();
 });
 
 app.on('window-all-closed', () => {
