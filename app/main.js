@@ -26,7 +26,7 @@ const getFileFromUser  = exports.getFileFromUser   = () => {
     ]
   });
 
-  if (files) { openFile(files[0]) } // A
+  if (files) { openFile(files[0]); } // A
 };
 
 const openFile = (file) => {
