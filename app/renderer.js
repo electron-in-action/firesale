@@ -52,7 +52,7 @@ const updateUserInterface = (isEdited) => {
 markdownView.addEventListener('keyup', (event) => {
   const currentContent = event.target.value;
   renderMarkdownToHtml(currentContent);
-  updateUserInterface(currentContent !== originalContent)
+  updateUserInterface(currentContent !== originalContent);
 });
 
 newFileButton.addEventListener('click', () => {
