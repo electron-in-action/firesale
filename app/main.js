@@ -26,7 +26,7 @@ const createWindow = exports.createWindow = () => {
   const currentWindow = BrowserWindow.getFocusedWindow();
 
   if (currentWindow) {
-    const [ currentWindowX, currentWindowY ] = currentWindow.getPosition();
+    const [currentWindowX, currentWindowY] = currentWindow.getPosition();
     x = currentWindowX + 10;
     y = currentWindowY + 10;
   }
@@ -71,7 +71,7 @@ const createWindow = exports.createWindow = () => {
   return newWindow;
 };
 
-const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
+const getFileFromUser = exports.getFileFromUser = (targetWindow) => {
   const files = dialog.showOpenDialog(targetWindow, {
     properties: ['openFile'],
     filters: [
@@ -85,7 +85,6 @@ const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
 
 const openFile = exports.openFile = (targetWindow, file) => {
   const content = fs.readFileSync(file).toString();
-  startWatchingFile(targetWindow, file);
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
   targetWindow.webContents.send('file-opened', file, content);
