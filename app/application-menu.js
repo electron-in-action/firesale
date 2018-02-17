@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, Menu, shell } = require('electron');
+const { app, BrowserWindow, dialog, Menu } = require('electron');
 const mainProcess = require('./main');
 
 const createApplicationMenu = () => {
@@ -43,7 +43,7 @@ const createApplicationMenu = () => {
                 'There is currently no active document to save or export.'
               );
             }
-            mainProcess.saveMarkdown(focusedWindow);
+            focusedWindow.webContents.send('save-markdown');
           },
         },
         {
@@ -57,7 +57,7 @@ const createApplicationMenu = () => {
                 'There is currently no active document to save or export.'
               );
             }
-            mainProcess.saveHtml(focusedWindow);
+            focusedWindow.webContents.send('save-html');
           },
         },
         { type: 'separator' },

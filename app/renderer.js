@@ -195,3 +195,11 @@ markdownView.addEventListener('contextmenu', (event) => {
   event.preventDefault();
   createContextMenu().popup();
 });
+
+ipcRenderer.on('save-markdown', () => {
+  mainProcess.saveMarkdown(currentWindow, filePath, markdownView.value);
+});
+
+ipcRenderer.on('save-html', () => {
+  mainProcess.saveHtml(currentWindow, filePath, markdownView.value);
+});
