@@ -117,7 +117,8 @@ document.addEventListener('dragover', event => event.preventDefault());
 document.addEventListener('dragleave', event => event.preventDefault());
 document.addEventListener('drop', event => event.preventDefault());
 
-const getDraggedFile = (event) => event.dataTransfer.files[0];
+const getDraggedFile = (event) => event.dataTransfer.items[0];
+const getDroppedFile = (event) => event.dataTransfer.files[0];
 
 const fileTypeIsSupported = (file) => {
   return ['text/plain', 'text/markdown'].includes(file.type);
@@ -139,7 +140,7 @@ markdownView.addEventListener('dragleave', () => {
 });
 
 markdownView.addEventListener('drop', (event) => {
-  const file = getDraggedFile(event);
+  const file = getDroppedFile(event);
 
   if (fileTypeIsSupported(file)) {
     mainProcess.openFile(currentWindow, file.path);
