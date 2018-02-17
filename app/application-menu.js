@@ -197,7 +197,8 @@ const createApplicationMenu = () => {
       ],
     });
 
-    const windowMenu = template.find(item => item.label === 'Window'); // B
+    const windowMenu = template.find(item => item.label === 'Window');
+    windowMenu.role = 'window';
     windowMenu.submenu.push(
       { type: 'separator' },
       {
