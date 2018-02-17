@@ -164,6 +164,7 @@ if (process.platform === 'darwin') {
   });
 
   const windowMenu = template.find(item => item.label === 'Window'); // B
+  windowMenu.role = 'window';
   windowMenu.submenu.push(
     { type: 'separator' },
     {
