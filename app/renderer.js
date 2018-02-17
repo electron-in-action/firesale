@@ -71,7 +71,7 @@ revertButton.addEventListener('click', () => {
 });
 
 saveHtmlButton.addEventListener('click', () => {
-  mainProcess.saveHtml(currentWindow, markdownView.value);
+  mainProcess.saveHtml(currentWindow, htmlView.innerHTML);
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
