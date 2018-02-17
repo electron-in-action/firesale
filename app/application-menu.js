@@ -37,7 +37,7 @@ const template = [
               'There is currently no active document to save or export.'
             );
           }
-          mainProcess.saveMarkdown(focusedWindow);
+          focusedWindow.webContents.send('save-markdown');
         },
       },
       {
@@ -50,7 +50,7 @@ const template = [
               'There is currently no active document to save or export.'
             );
           }
-          mainProcess.saveHtml(focusedWindow);
+          focusedWindow.webContents.send('save-html');
         },
       },
     ],

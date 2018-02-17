@@ -72,7 +72,7 @@ revertButton.addEventListener('click', () => {
 });
 
 saveHtmlButton.addEventListener('click', () => {
-  mainProcess.saveHtml(currentWindow, markdownView.value);
+  mainProcess.saveHtml(currentWindow, htmlView.innerHTML);
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {
@@ -152,6 +152,14 @@ markdownView.addEventListener('drop', (event) => {
   markdownView.classList.remove('drag-error');
 });
 
+ipcRenderer.on('save-markdown', () => {
+  mainProcess.saveMarkdown(currentWindow, filePath, markdownView.value);
+});
+
+ipcRenderer.on('save-html', () => {
+  mainProcess.saveHtml(currentWindow, htmlView.innerHTML);
+});
+
 const markdownContextMenu = Menu.buildFromTemplate([
   { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
   { type: 'separator' },
@@ -160,7 +168,6 @@ const markdownContextMenu = Menu.buildFromTemplate([
   { label: 'Paste', role: 'paste' },
   { label: 'Select All', role: 'selectall' },
 ]);
-
 
 markdownView.addEventListener('contextmenu', (event) => {
   event.preventDefault();
