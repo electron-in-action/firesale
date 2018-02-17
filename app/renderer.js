@@ -75,7 +75,7 @@ revertButton.addEventListener('click', () => {
 });
 
 saveHtmlButton.addEventListener('click', () => {
-  mainProcess.saveHtml(currentWindow, markdownView.value);
+  mainProcess.saveHtml(currentWindow, htmlView.innerHTML);
 });
 
 const showFile = () => {
