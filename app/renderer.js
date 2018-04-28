@@ -116,7 +116,7 @@ ipcRenderer.on('file-opened', (event, file, content) => {
 });
 
 ipcRenderer.on('file-changed', (event, file, content) => {
-  if (isDifferentContent(content)) return;
+  if (!isDifferentContent(content)) return;
   const result = remote.dialog.showMessageBox(currentWindow, {
     type: 'warning',
     title: 'Overwrite Current Unsaved Changes?',

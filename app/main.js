@@ -136,7 +136,7 @@ const startWatchingFile = (targetWindow, file) => {
   stopWatchingFile(targetWindow);
 
   const watcher = fs.watchFile(file, () => {
-    const content = fs.readFileSync(file);
+    const content = fs.readFileSync(file).toString();
     targetWindow.webContents.send('file-changed', file, content);
   });
 
