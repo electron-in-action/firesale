@@ -5,15 +5,15 @@
   "description": "Completed code from [Electron in Action](http://bit.ly/electronjs).",
   "main": "app/main.js",
   "dependencies": {
-    "electron": "^1.6.10",
-    "marked": "^0.3.6"
+    "electron": "^3.0.10",
+    "marked": "^0.5.2"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^10.0.1",
     "devtron": "^1.4.0",
-    "electron-packager": "^8.7.1",
-    "eslint": "^3.19.0",
-    "eslint-plugin-import": "^2.3.0"
+    "electron-packager": "^13.0.0",
+    "eslint": "^5.10.0",
+    "eslint-plugin-import": "^2.14.0"
   },
   "scripts": {
     "start": "electron .",
