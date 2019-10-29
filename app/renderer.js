@@ -162,7 +162,7 @@ ipcRenderer.on('save-html', () => {
 });
 
 const markdownContextMenu = Menu.buildFromTemplate([
-  { label: 'Open File', click() { mainProcess.getFileFromUser(); } },
+  { label: 'Open File', click(item, focusedWindow) { mainProcess.getFileFromUser(focusedWindow); } },
   { type: 'separator' },
   { label: 'Cut', role: 'cut' },
   { label: 'Copy', role: 'copy' },
