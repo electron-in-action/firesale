@@ -6,7 +6,7 @@
   "author": "Steve Kinney <hello@stevekinney.net> (http://stevekinney.net)",
   "license": "MIT",
   "dependencies": {
-    "electron": "^1.7.10",
+    "electron": "^11.5.0",
     "marked": "^0.3.12"
   }
 }
